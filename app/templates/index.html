@@ -1,0 +1,18 @@
+<!DOCTYPe html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Airplane Image Search by Make and Model</title>
+
+    </head>
+    <body>
+        {% block content %}
+        <p>Image Search: </p>
+        <p>Enter Airpane Mak and/or Model</p>
+        <form action = "/airplane_search", method="POST" target="gallery" onsubmit="window.open('about:blank','gallery','width=1000,height=800');">>
+            <label for="make_model" style="font-size:1em;font-weight:bold;">Enter Make and Model of Airplane</label>
+            <input type="text" id="make_model" name="make_model" value="">
+            <input type="submit" value="Search">
+            {% endblock %}
+    </body>
+    </html>

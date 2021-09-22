@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Airplane Images Display</title>
+        <!-- html5 image gallery w3schools for styling divs only-->
+        <style>
+            div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+          }
+          
+          div.gallery:hover {
+            border: 1px solid #777;
+          }
+          
+          div.gallery img {
+            width: 100%;
+            height: auto;
+          }
+          
+          div.desc {
+            padding: 15px;
+            text-align: center;
+          }
+          </style>
+    </head>
+    <body>
+        {% block content %}
+        {% for item in data %}
+        <div class="gallery">
+          <img src="http://planes-repo.lcsitmedia.com/images/{{ item[1] }}.jpg" width="600" height="400">
+        <div class="desc">{{ item[2] }} {{ item[3] }}</div>
+      </div>
+      {% endfor %}
+      {% endblock %}
+    </body>
+</html>
