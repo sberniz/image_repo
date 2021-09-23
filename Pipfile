@@ -7,6 +7,8 @@ name = "pypi"
 flask = "*"
 flask-sqlalchemy = "*"
 jinja2 = "*"
+pandas = "*"
+flask-cors = "*"
 
 [dev-packages]
 

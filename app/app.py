@@ -1,8 +1,10 @@
 from flask import Flask, render_template, escape, request
+from flask_cors import CORS
 from .dbsearch import search
 def create_app():
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__)
+    CORS(app)
     @app.route('/')
     def root():
         return render_template('index.html')
@@ -20,7 +22,7 @@ def create_app():
                     """.format(airplane_info[0], airplane_info[0])
         data = search(QUERY)
         print(data)
-        return render_template('display.html',data=data)
+        return render_template("display.html",data=data)
 
 
     return app
