@@ -21,7 +21,6 @@ def create_app():
             QUERY = """SELECT * FROM airplane_info WHERE manufacturer LIKE '%{}%' OR model LIKE '%{}%';
                     """.format(airplane_info[0], airplane_info[0])
         data = search(QUERY)
-        print(data)
         return render_template("display.html",data=data)
 
 

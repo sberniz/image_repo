@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Airplane Images Display</title>
+        <link href="static/lightbox2/css/lightbox.css" rel="stylesheet" />
         <!-- html5 image gallery w3schools for styling divs only-->
         <style>
             div.gallery {
@@ -29,11 +30,13 @@
     <body>
         {% block content %}
         {% for item in data %}
-        <div class="gallery">
+        <a href="http://planes-repo.lcsitmedia.com/images/{{ item[1] }}.jpg" data-lightbox="planes" data-title="{{ item[2] }} {{ item[3] }}">
+          <div class="gallery">
           <img src="http://planes-repo.lcsitmedia.com/images/{{ item[1] }}.jpg" width="600" height="400">
         <div class="desc">{{ item[2] }} {{ item[3] }}</div>
-      </div>
+      </div></a>
       {% endfor %}
+      <script src="static/lightbox2/js/lightbox-plus-jquery.js"></script>
       {% endblock %}
     </body>
 </html>
