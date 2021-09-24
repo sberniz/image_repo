@@ -1,4 +1,4 @@
-from flask import Flask, render_template, escape, request
+from flask import Flask, render_template, escape, request,jsonify
 from flask_cors import CORS
 from .dbsearch import search
 def create_app():
@@ -21,7 +21,16 @@ def create_app():
             QUERY = """SELECT * FROM airplane_info WHERE manufacturer LIKE '%{}%' OR model LIKE '%{}%';
                     """.format(airplane_info[0], airplane_info[0])
         data = search(QUERY)
-        return render_template("display.html",data=data)
+        json_names = []
+        for item in data:
+            json_dict = {
+                'id':item[0],
+                'img_id':item[1],
+                'make':item[2],
+                'model':item[3]
+            }
+            json_names.append(json_dict)
+        return jsonify(json_names)
 
 
     return app
