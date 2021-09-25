@@ -11,7 +11,12 @@
 - Open browser and insert given ip address
 - >http://localhost:5000
 - search by make and/or model and click search 
+# PHP 
+- Instructions coming soon
+- URL: https://planes-repo.lcsitmedia.com
+
 # TODO
 - Add image classification 
 - Search by image and give out make/model 
-- Create a website /webapp and deploy 
+- Allow for image upload
+- Create  PHP instructions

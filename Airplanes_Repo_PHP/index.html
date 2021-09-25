@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="AirPlane Repository, Planes Photos, Planes Pictures, Plane Brands, Plane Types" />
+        <!-- CSS Style Sheet-->
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- Lightbox css Load-->
+        <link href="lightbox2/css/lightbox.css" rel="stylesheet" />
+        <!-- End of lighbox css load -->
+        <title>Airplane Image Search by Make and Model</title>
+
+    </head>
+    <body>
+        <div class="container">
+        <form id="image_search" name="image_search">
+            <div class="row"> 
+                <div class="col-25">
+                    <label for="make_model" style="font-size:1em;font-weight:bold;">Enter Make and/or Model of Airplane</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="make_model" name="make_model" value="">
+					<input type="submit" value="Search">
+                </div>
+                </div>
+                 
+            </form>
+			
+        <div id="gallery_output" class="container2">
+            <!-- Gallery Test to remove afer done -->
+            <a href="images/0034309.jpg" data-lightbox="planes" data-title="test">
+                <div class="gallery">
+                <img src="images/0034309.jpg" width="600" height="400">
+              <div class="desc">sample Picture Search make and/or Model for more pictures</div>
+            </div></a>
+            <!-- End Gallery Test -->
+          </div>
+
+        </div>
+        <!-- LightBox Javascript -->
+        <script src="lightbox2/js/lightbox-plus-jquery.js"></script>
+        <!-- end of lightbox Js Load-->
+        <!-- Ajax Call Script -->
+        <script>
+
+            //Ajax Post Code using xhttp request 
+            function sendData(airplane_info) {
+                //Ajax Request start 
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        //Process Json response
+						
+                        let gallery = JSON.parse(this.responseText)
+                        let html_info = ""
+                        for (var photo of gallery){
+                            html_info +="<a href=\"images/"+photo['img_id']+".jpg\" data-lightbox=\"planes\" data-title=\""+photo['Manufacturer']+" "+photo['model']+"\">"
+                            html_info +="<div class=\"gallery\">"
+                            html_info +="<img src=\"images/"+photo['img_id']+".jpg\" width=\"600\" height=\"400\">"
+                            html_info +="<div class=\"desc\">"+photo['Manufacturer']+" "+photo['model']+"</div></div></a>"
+
+                        }
+                        document.getElementById("gallery_output").innerHTML = html_info;
+                    }
+                    else {
+                        document.getElementById("gallery_output").innerHTML = "Loading Pictures...";
+                    }
+                };
+                xhttp.open("POST", "processor.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("make_model="+airplane_info);
+            }
+
+            //Gets data from form input takes over prevent default submit. 
+            function search_plane(){
+                let image_s = document.getElementById("image_search");
+                image_s.addEventListener("submit",function(event) {
+                    event.preventDefault();
+                    let airplane_info = document.getElementById("make_model").value;
+                    sendData(airplane_info); 
+                });
+            }
+            window.onload=search_plane;
+        </script>
+    </body>
+    </html>
