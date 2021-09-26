@@ -54,13 +54,18 @@
                         //Process Json response
                         let gallery = JSON.parse(this.responseText)
                         let html_info = ""
-                        for (var photo of gallery){
-                            html_info +="<a href=\"http://planes-repo.lcsitmedia.com/images/"+photo['img_id']+".jpg\" data-lightbox=\"planes\" data-title=\""+photo['make']+" "+photo['model']+"\">"
-                            html_info +="<div class=\"gallery\">"
-                            html_info +="<img src=\"http://planes-repo.lcsitmedia.com/images/"+photo['img_id']+".jpg\" width=\"600\" height=\"400\">"
-                            html_info +="<div class=\"desc\">"+photo['make']+" "+photo['model']+"</div></div></a>"
-
-                        }
+						if (gallery.length > 0 ) {
+                            for (var photo of gallery){
+                                html_info +="<a href=\"https://planes-repo.lcsitmedia.com/images/"+photo['img_id']+".jpg\" data-lightbox=\"planes\" data-title=\""+photo['Manufacturer']+" "+photo['model']+"\">"
+                                html_info +="<div class=\"gallery\">"
+                                html_info +="<img src=\"https://planes-repo.lcsitmedia.com/images/"+photo['img_id']+".jpg\" width=\"600\" height=\"400\">"
+                                html_info +="<div class=\"desc\">"+photo['Manufacturer']+" "+photo['model']+"</div></div></a>"
+    
+                            }
+                            }
+                            else {
+                                html_info = "NO Results Returned. Modify your search or search for a different brand. <br />Better Filtering coming soon as well as Image Uploading";
+                            }
                         document.getElementById("gallery_output").innerHTML = html_info;
                     }
                     else {

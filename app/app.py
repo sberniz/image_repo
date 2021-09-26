@@ -26,7 +26,7 @@ def create_app():
             json_dict = {
                 'id':item[0],
                 'img_id':item[1],
-                'make':item[2],
+                'Manufacturer':item[2],
                 'model':item[3]
             }
             json_names.append(json_dict)
